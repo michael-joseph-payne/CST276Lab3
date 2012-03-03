@@ -1,5 +1,5 @@
-Semi-implemented composite pattern with composite iterator
+Composite pattern w/ Composite Iterator in C#
 
-The composite iterator does not function yet...do not expect it to do anything
+Building for CST 276 @ Oregon Institute of Technology
 
-2/23/2012
+Last Updated: 3/3/2012
