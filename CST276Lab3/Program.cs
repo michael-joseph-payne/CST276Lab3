@@ -11,6 +11,10 @@ namespace CST276Lab3
         {
             Robot1 robot = new Robot1(new ElectricGuitar());
             robot.assemble();
+            robot.setWhatToAssemble(new AcousticGuitar());
+            robot.assemble();
+            robot.setWhatToAssemble(new AcousticTuningAssembly());
+            robot.assemble();
             Console.ReadLine();
         }
     }
