@@ -23,34 +23,6 @@ namespace CST276Lab3
         }
     }
 
-    public class GuitarComponentIterator : Iterator
-    {
-        GuitarComponent[] items;
-        int position = 0;
-
-        public GuitarComponentIterator(GuitarComponent[] items)
-        {
-            this.items = items;
-        }
-        public Object next()
-        {
-            GuitarComponent guitarItem = items[position];
-            position = position + 1;
-            return guitarItem;
-        }
-        public bool hasNext()
-        {
-            if (position >= items.Length || items[position] == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-    }
-
     public class CompositeIterator : Iterator
     {
         Stack<Iterator> stack = new Stack<Iterator>();
@@ -96,6 +68,34 @@ namespace CST276Lab3
                 {
                     return true;
                 }
+            }
+        }
+    }
+
+    public class GuitarComponentIterator : Iterator
+    {
+        GuitarComponent[] items;
+        int position = 0;
+
+        public GuitarComponentIterator(GuitarComponent[] items)
+        {
+            this.items = items;
+        }
+        public Object next()
+        {
+            GuitarComponent guitarItem = items[position];
+            position = position + 1;
+            return guitarItem;
+        }
+        public bool hasNext()
+        {
+            if (position >= items.Length || items[position] == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

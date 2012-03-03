@@ -9,9 +9,10 @@ namespace CST276Lab3
     {
         static void Main(string[] args)
         {
-            TuningAssembly tuningAssembly = new TuningAssembly();
-            CompositeIterator tuningAssemblyIterator = new CompositeIterator(tuningAssembly.createIterator());
-            tuningAssembly.assemble();
+            GuitarComponent electricGuitar = new ElectricGuitar();
+            electricGuitar.add(new ElectricComponents());
+            CompositeIterator tuningAssemblyIterator = new CompositeIterator(electricGuitar.createIterator());
+            electricGuitar.assemble();
             while (tuningAssemblyIterator.hasNext())
             {
                 GuitarComponent guitarComponent = (GuitarComponent) tuningAssemblyIterator.next();

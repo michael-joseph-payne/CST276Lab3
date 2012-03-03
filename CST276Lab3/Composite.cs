@@ -7,31 +7,187 @@ namespace CST276Lab3
 {
     public abstract class GuitarComponent
     {
-        public void add(GuitarComponent guitarComponent)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void add(GuitarComponent guitarComponent);
         public abstract Iterator createIterator();
         public abstract String getDescription();
         public abstract void assemble();
     }
 
-    public abstract class GuitarItem : GuitarComponent
-    {
-        public override Iterator createIterator()
-        {
-            return new NullIterator();
-        }
-        public override abstract String getDescription();
-        public override abstract void assemble();
-    }
-
-    public class TuningAssembly : GuitarComponent
+    public class ElectricGuitar : GuitarComponent
     {
         List<GuitarComponent> itemList = new List<GuitarComponent>();
-        String description = "Tuning Assembly";
+        String description = "Guitar";
 
-        public TuningAssembly()
+        public ElectricGuitar()
+        {
+            add(new ElectricBody());
+            add(new Neck());
+            add(new Head());
+            add(new ElectricTuningAssembly());
+            add(new ElectricComponents());
+            add(new FinishHardware());
+        }
+
+        public override void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
+        }
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("Assembling " + description);
+        }
+    }
+    public class FretBoard : GuitarComponent
+    {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
+        String description = "Fret Board";
+
+        public FretBoard()
+        {
+            add(new Rosewood());
+            add(new Frets());
+        }
+
+        public override void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
+        }
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("Assembling " + description);
+        }
+    }
+    public class Head : GuitarComponent
+    {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
+        String description = "Head";
+
+        public Head()
+        {
+            add(new Maple());
+        }
+
+        public override void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
+        }
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("Assembling " + description);
+        }
+    }
+    public class Neck : GuitarComponent
+    {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
+        String description = "Neck";
+
+        public Neck()
+        {
+            add(new Maple());
+            add(new FretBoard());
+        }
+
+        public override void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
+        }
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("Assembling " + description);
+        }
+    }
+    public class ElectricBody : GuitarComponent
+    {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
+        String description = "Electric Body";
+
+        public ElectricBody()
+        {
+            add(new Maple());
+        }
+
+        public override void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
+        }
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("Assembling " + description);
+        }
+    }
+    public class AcousticBody : GuitarComponent
+    {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
+        String description = "Acoustic Body";
+
+        public AcousticBody()
+        {
+            add(new Spruce());
+        }
+
+        public override void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
+        }
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("Assembling " + description);
+        }
+    }
+    public class ElectricTuningAssembly : GuitarComponent
+    {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
+        String description = "Electric Tuning Assembly";
+
+        public ElectricTuningAssembly()
         {
             add(new LowEStringPeg());
             add(new AStringPeg());
@@ -52,7 +208,7 @@ namespace CST276Lab3
             add(new WhammyBar());
         }
 
-        public new void add(GuitarComponent guitarComponent)
+        public override void add(GuitarComponent guitarComponent)
         {
             itemList.Add(guitarComponent);
         }
@@ -68,6 +224,119 @@ namespace CST276Lab3
         {
             Console.WriteLine("Assembling " + description);
         }
+    }
+    public class AcousticTuningAssembly : GuitarComponent
+    {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
+        String description = "Acoustic Tuning Assembly";
+
+        public AcousticTuningAssembly()
+        {
+            add(new LowEStringPeg());
+            add(new AStringPeg());
+            add(new DStringPeg());
+            add(new GStringPeg());
+            add(new BStringPeg());
+            add(new HighEStringPeg());
+
+            add(new LowEString());
+            add(new AString());
+            add(new DString());
+            add(new GString());
+            add(new BString());
+            add(new HighEString());
+
+            add(new Saddle());
+        }
+
+        public override void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
+        }
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("Assembling " + description);
+        }
+    }
+    public class ElectricComponents : GuitarComponent
+    {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
+        String description = "Electronic Components";
+
+        public ElectricComponents()
+        {
+            add(new OutputJack());
+            add(new Pickups());
+            add(new SelectorSwitch());
+            add(new ToneKnob());
+        }
+
+        public override void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
+        }
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("Assembling " + description);
+        }
+    }
+    public class FinishHardware : GuitarComponent
+    {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
+        String description = "Finish Hardware";
+
+        public FinishHardware()
+        {
+            add(new ScratchPlate());
+            add(new StrapButtons());
+        }
+
+        public override void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
+        }
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("Assembling " + description);
+        }
+    }
+
+    public abstract class GuitarItem : GuitarComponent
+    {
+        public override void add(GuitarComponent guitarComponent)
+        {
+            throw new NotImplementedException();
+        }
+        public override Iterator createIterator()
+        {
+            return new NullIterator();
+        }
+        public override abstract String getDescription();
+        public override abstract void assemble();
     }
 
     public class LowEStringPeg : GuitarItem
@@ -148,7 +417,6 @@ namespace CST276Lab3
             Console.WriteLine("\tPlacing " + description);
         }
     }
-
     public class InotationAdjust : GuitarItem
     {
         String description = "Inotation Adjust";
@@ -162,7 +430,6 @@ namespace CST276Lab3
             Console.WriteLine("\tPlacing " + description);
         }
     }
-
     public class LowEString : GuitarItem
     {
         String description = "Low E String";
@@ -241,7 +508,6 @@ namespace CST276Lab3
             Console.WriteLine("\tPlacing " + description);
         }
     }
-
     public class WhammyBar : GuitarItem
     {
         String description = "Whammy Bar";
@@ -253,6 +519,149 @@ namespace CST276Lab3
         public override void assemble()
         {
             Console.WriteLine("\tPlacing " + description);
+        }
+    }
+    public class OutputJack : GuitarItem
+    {
+        String description = "Output Jack";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tPlacing " + description);
+        }
+    }
+    public class Pickups : GuitarItem
+    {
+        String description = "Pickups";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tPlacing " + description);
+        }
+    }
+    public class SelectorSwitch : GuitarItem
+    {
+        String description = "Selector Switch";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tPlacing " + description);
+        }
+    }
+    public class ToneKnob : GuitarItem
+    {
+        String description = "Tone Knob";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tPlacing " + description);
+        }
+    }
+    public class ScratchPlate : GuitarItem
+    {
+        String description = "Output Jack";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tPlacing " + description);
+        }
+    }
+    public class Saddle : GuitarItem
+    {
+        String description = "Saddle";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tPlacing " + description);
+        }
+    }
+    public class StrapButtons : GuitarItem
+    {
+        String description = "Strap Buttons";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tPlacing " + description);
+        }
+    }
+    public class Frets : GuitarItem
+    {
+        String description = "Frets";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tPlacing " + description);
+        }
+    }
+    public class Rosewood : GuitarItem
+    {
+        String description = "Rosewood";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tCarving " + description);
+        }
+    }
+    public class Maple : GuitarItem
+    {
+        String description = "Maple";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tCarving " + description);
+        }
+    }
+    public class Spruce : GuitarItem
+    {
+        String description = "Spruce";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tCarving " + description);
         }
     }
 }
