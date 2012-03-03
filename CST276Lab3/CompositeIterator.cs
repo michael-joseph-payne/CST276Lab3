@@ -5,52 +5,44 @@ using System.Text;
 
 namespace CST276Lab3
 {
-    public class Iterator
+    public interface Iterator
     {
-        public static GuitarComponent next()
+        bool hasNext();
+        Object next();
+    }
+
+    public class NullIterator : Iterator
+    {
+        public bool hasNext()
         {
-            //Need to implement
+            return false;
+        }
+        public Object next()
+        {
             return null;
         }
     }
 
-    public class CompositeIterator : Iterator
+    public class GuitarComponentIterator : Iterator
     {
-        Stack<CompositeIterator> stack = new Stack<CompositeIterator>();
-   
-        public CompositeIterator(CompositeIterator iterator)
+        GuitarComponent[] items;
+        int position = 0;
+
+        public GuitarComponentIterator(GuitarComponent[] items)
         {
-            stack.Push(iterator);
+            this.items = items;
         }
-   
-        public new Object next()
+        public Object next()
         {
-            if (hasNext())
-            {
-                Iterator iterator = (Iterator) stack.Peek();
-                GuitarComponent component = (GuitarComponent) Iterator.next();
-                stack.Push(null/*component.createIterator()*/);
-                return component;
-            }
-            else
-            {
-                return null;
-            }
-    }
-  
-    public bool hasNext()
-    {
-        if (stack.Count == 0)
-        {
-            return false;
+            GuitarComponent guitarItem = items[position];
+            position = position + 1;
+            return guitarItem;
         }
-        else
+        public bool hasNext()
         {
-            Iterator iterator = (Iterator) stack.Peek();
-            if (!hasNext())
+            if (position >= items.Length || items[position] == null)
             {
-                stack.Pop();
-                return hasNext();
+                return false;
             }
             else
             {
@@ -58,10 +50,53 @@ namespace CST276Lab3
             }
         }
     }
-   
-    public void remove()
+
+    public class CompositeIterator : Iterator
     {
-        throw new NotImplementedException();
+        Stack<Iterator> stack = new Stack<Iterator>();
+   
+        public CompositeIterator(Iterator iterator)
+        {
+            stack.Push(iterator);
+        }
+
+        public Object next()
+        {
+            if (hasNext())
+            {
+                Iterator iterator = (Iterator) stack.Peek();
+                GuitarComponent component = (GuitarComponent) iterator.next();
+                if (component is GuitarComponent)
+                {
+                    stack.Push(component.createIterator());
+                } 
+                return component;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public bool hasNext()
+        {
+            if (stack.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                Iterator iterator = (Iterator)stack.Peek();
+                if (!iterator.hasNext())
+                {
+                    stack.Pop();
+                    return hasNext();
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
     }
-}
 }

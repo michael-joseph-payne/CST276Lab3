@@ -7,54 +7,58 @@ namespace CST276Lab3
 {
     public abstract class GuitarComponent
     {
-        List<GuitarComponent> jobQueue = new List<GuitarComponent>();
-
         public void add(GuitarComponent guitarComponent)
         {
-            jobQueue.Add(guitarComponent);
+            throw new NotImplementedException();
         }
-        public void remove(GuitarComponent guitarComponent)
-        {
-            jobQueue.Remove(guitarComponent);
-        }
-        public GuitarComponent getChild(int i)
-        {
-            //Need to implement with iterator
-            return null;
-        }
+        public abstract Iterator createIterator();
         public abstract String getDescription();
         public abstract void assemble();
     }
 
     public abstract class GuitarItem : GuitarComponent
     {
+        public override Iterator createIterator()
+        {
+            return new NullIterator();
+        }
         public override abstract String getDescription();
         public override abstract void assemble();
     }
 
     public class TuningAssembly : GuitarComponent
     {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
         String description = "Tuning Assembly";
 
         public TuningAssembly()
         {
-            base.add(new LowEStringPeg());
-            base.add(new AStringPeg());
-            base.add(new DStringPeg());
-            base.add(new GStringPeg());
-            base.add(new BStringPeg());
-            base.add(new HighEStringPeg());
+            add(new LowEStringPeg());
+            add(new AStringPeg());
+            add(new DStringPeg());
+            add(new GStringPeg());
+            add(new BStringPeg());
+            add(new HighEStringPeg());
 
-            base.add(new InotationAdjust());
+            add(new InotationAdjust());
 
-            base.add(new LowEString());
-            base.add(new AString());
-            base.add(new DString());
-            base.add(new GString());
-            base.add(new BString());
-            base.add(new HighEString());
+            add(new LowEString());
+            add(new AString());
+            add(new DString());
+            add(new GString());
+            add(new BString());
+            add(new HighEString());
 
-            base.add(new WhammyBar());
+            add(new WhammyBar());
+        }
+
+        public new void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
         }
         public override String getDescription()
         {
@@ -62,7 +66,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("Assembling " + description);
         }
     }
 
@@ -76,7 +80,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
     public class AStringPeg : GuitarItem
@@ -89,7 +93,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
     public class DStringPeg : GuitarItem
@@ -102,7 +106,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
     public class GStringPeg : GuitarItem
@@ -115,7 +119,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
     public class BStringPeg : GuitarItem
@@ -128,7 +132,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
     public class HighEStringPeg : GuitarItem
@@ -141,7 +145,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
 
@@ -155,7 +159,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
 
@@ -169,7 +173,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
     public class AString : GuitarItem
@@ -182,7 +186,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
     public class DString : GuitarItem
@@ -195,7 +199,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
     public class GString : GuitarItem
@@ -208,7 +212,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
     public class BString : GuitarItem
@@ -221,7 +225,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
     public class HighEString : GuitarItem
@@ -234,7 +238,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
 
@@ -248,7 +252,7 @@ namespace CST276Lab3
         }
         public override void assemble()
         {
-            Console.Write(description);
+            Console.WriteLine("\tPlacing " + description);
         }
     }
 }
