@@ -16,16 +16,47 @@ namespace CST276Lab3
     public class ElectricGuitar : GuitarComponent
     {
         List<GuitarComponent> itemList = new List<GuitarComponent>();
-        String description = "Guitar";
+        String description = "Electric Guitar";
 
         public ElectricGuitar()
         {
             add(new ElectricBody());
             add(new Neck());
             add(new Head());
-            add(new ElectricTuningAssembly());
             add(new ElectricComponents());
             add(new FinishHardware());
+            add(new ElectricTuningAssembly());
+        }
+
+        public override void add(GuitarComponent guitarComponent)
+        {
+            itemList.Add(guitarComponent);
+        }
+        public override Iterator createIterator()
+        {
+            return new GuitarComponentIterator(itemList.ToArray());
+        }
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("Assembling " + description);
+        }
+    }
+    public class AcousticGuitar : GuitarComponent
+    {
+        List<GuitarComponent> itemList = new List<GuitarComponent>();
+        String description = "Acoustic Guitar";
+
+        public AcousticGuitar()
+        {
+            add(new AcousticBody());
+            add(new Neck());
+            add(new Head());
+            add(new FinishHardware());
+            add(new AcousticTuningAssembly());
         }
 
         public override void add(GuitarComponent guitarComponent)
@@ -81,6 +112,7 @@ namespace CST276Lab3
         public Head()
         {
             add(new Maple());
+            add(new ClearCoat());
         }
 
         public override void add(GuitarComponent guitarComponent)
@@ -108,6 +140,7 @@ namespace CST276Lab3
         public Neck()
         {
             add(new Maple());
+            add(new ClearCoat());
             add(new FretBoard());
         }
 
@@ -136,6 +169,7 @@ namespace CST276Lab3
         public ElectricBody()
         {
             add(new Maple());
+            add(new Paint());
         }
 
         public override void add(GuitarComponent guitarComponent)
@@ -163,6 +197,7 @@ namespace CST276Lab3
         public AcousticBody()
         {
             add(new Spruce());
+            add(new ClearCoat());
         }
 
         public override void add(GuitarComponent guitarComponent)
@@ -575,7 +610,7 @@ namespace CST276Lab3
     }
     public class ScratchPlate : GuitarItem
     {
-        String description = "Output Jack";
+        String description = "Scratch Plate";
 
         public override String getDescription()
         {
@@ -662,6 +697,32 @@ namespace CST276Lab3
         public override void assemble()
         {
             Console.WriteLine("\tCarving " + description);
+        }
+    }
+    public class Paint : GuitarItem
+    {
+        String description = "Paint";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tAdding " + description);
+        }
+    }
+    public class ClearCoat : GuitarItem
+    {
+        String description = "Clear Coat";
+
+        public override String getDescription()
+        {
+            return description;
+        }
+        public override void assemble()
+        {
+            Console.WriteLine("\tAdding " + description);
         }
     }
 }
