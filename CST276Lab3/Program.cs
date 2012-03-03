@@ -9,21 +9,8 @@ namespace CST276Lab3
     {
         static void Main(string[] args)
         {
-            GuitarComponent electricGuitar = new AcousticGuitar();
-            CompositeIterator tuningAssemblyIterator = new CompositeIterator(electricGuitar.createIterator());
-            electricGuitar.assemble();
-            while (tuningAssemblyIterator.hasNext())
-            {
-                GuitarComponent guitarComponent = (GuitarComponent) tuningAssemblyIterator.next();
-                try
-                {
-                    guitarComponent.assemble();
-                }
-                catch
-                {
-                    Console.WriteLine("Exception");
-                }
-            }
+            Robot1 robot = new Robot1(new ElectricGuitar());
+            robot.assemble();
             Console.ReadLine();
         }
     }
