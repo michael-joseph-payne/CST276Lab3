@@ -1,5 +1,5 @@
-c:\users\mjpayne1\documents\visual studio 2010\Projects\CST276Lab3\CST276Lab3\bin\Debug\CST276Lab3.exe
-c:\users\mjpayne1\documents\visual studio 2010\Projects\CST276Lab3\CST276Lab3\bin\Debug\CST276Lab3.pdb
-c:\users\mjpayne1\documents\visual studio 2010\Projects\CST276Lab3\CST276Lab3\obj\x86\Debug\ResolveAssemblyReference.cache
-c:\users\mjpayne1\documents\visual studio 2010\Projects\CST276Lab3\CST276Lab3\obj\x86\Debug\CST276Lab3.exe
-c:\users\mjpayne1\documents\visual studio 2010\Projects\CST276Lab3\CST276Lab3\obj\x86\Debug\CST276Lab3.pdb
+C:\Users\mjpayne1\documents\visual studio 2010\Projects\CST276Lab3\CST276Lab3\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\mjpayne1\documents\visual studio 2010\Projects\CST276Lab3\CST276Lab3\bin\Debug\CST276Lab3.exe
+C:\Users\mjpayne1\documents\visual studio 2010\Projects\CST276Lab3\CST276Lab3\bin\Debug\CST276Lab3.pdb
+C:\Users\mjpayne1\documents\visual studio 2010\Projects\CST276Lab3\CST276Lab3\obj\x86\Debug\CST276Lab3.exe
+C:\Users\mjpayne1\documents\visual studio 2010\Projects\CST276Lab3\CST276Lab3\obj\x86\Debug\CST276Lab3.pdb

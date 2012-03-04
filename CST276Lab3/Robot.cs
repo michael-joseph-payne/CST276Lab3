@@ -5,19 +5,15 @@ using System.Text;
 
 namespace CST276Lab3
 {
-    interface Robot
+    class Robot
     {
-        void setWhatToAssemble(GuitarComponent whatToAssemble);
-        void assemble();
-    }
-
-    class Robot1 : Robot
-    {
+        String whichRobot;
         GuitarComponent whatToAssemble;
         CompositeIterator compositeIterator;
 
-        public Robot1(GuitarComponent whatToAssemble)
+        public Robot(String whichRobot, GuitarComponent whatToAssemble)
         {
+            this.whichRobot = whichRobot;
             this.whatToAssemble = whatToAssemble;
             this.compositeIterator = new CompositeIterator(whatToAssemble.createIterator());
         }
@@ -28,8 +24,14 @@ namespace CST276Lab3
             this.compositeIterator = new CompositeIterator(whatToAssemble.createIterator());
         }
 
+        public String whatAmIAssembling()
+        {
+            return whatToAssemble.getDescription();
+        }
+
         public void assemble()
         {
+            Console.WriteLine(whichRobot + " - Assembling " + whatToAssemble.getDescription());
             whatToAssemble.assemble();
             while (compositeIterator.hasNext())
             {
