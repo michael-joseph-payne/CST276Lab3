@@ -7,6 +7,7 @@ namespace CST276Lab3
 {
     class Program
     {
+        //Some enumerations to create a basic state machine to control the interface loop
         enum whichRobot { Robot1, Robot2, Robot3 };
         enum whatAreWeDoing { PickRobot, PickProduct, AssembleProduct, AskIfQuit, WantToQuit };
         enum whatAreWeBuilding { ElectricGuitar, AcousticGuitar, Fretboard, Head, Neck, ElectricBody, AcousticBody, ElectricTuningAssembly, AcousticTuningAssembly, ElectricComponents, FinishHardware };
@@ -16,16 +17,21 @@ namespace CST276Lab3
             whichRobot activeRobot = whichRobot.Robot1;
             whatAreWeDoing activeState = whatAreWeDoing.PickRobot;
 
+            //Instantiate our 3 robots
             Robot robot1 = new Robot("Robot 1", new ElectricGuitar());
             Robot robot2 = new Robot("Robot 2", new ElectricGuitar());
             Robot robot3 = new Robot("Robot 3", new ElectricGuitar());
+
+            //Main interface loop, controlled by the enumeration states we defined earlier
             while (activeState != whatAreWeDoing.WantToQuit)
             {
                 switch (activeState)
                 {
+                    //If we need to pick a robot
                     case whatAreWeDoing.PickRobot:
                         Console.WriteLine("Which robot would you like to assemble something? (1/2/3)");
                         String choiceOfRobot = Console.ReadLine();
+                        //Pick one
                         switch (choiceOfRobot)
                         {
                             case "1":
@@ -47,6 +53,7 @@ namespace CST276Lab3
                         }
                         activeState = whatAreWeDoing.PickProduct;
                         break;
+                    //Pick what we want the robot to build
                     case whatAreWeDoing.PickProduct:
                         Console.WriteLine("Picking a product to build:");
                         Console.WriteLine("1)  Electric Guitar");
@@ -61,6 +68,8 @@ namespace CST276Lab3
                         Console.WriteLine("10) Electric Components");
                         Console.WriteLine("11) Finish Hardware");
                         String choiceOfProduct = Console.ReadLine();
+                        //Then sets that robot's task with the item we picked
+                        //I should have encapsulated this, but it's just to demo the patterns for the assignment
                         switch (choiceOfProduct)
                         {
                             case "1":
@@ -266,6 +275,7 @@ namespace CST276Lab3
                                 break;
                         }
                         break;
+                    //Then assemble the product
                     case whatAreWeDoing.AssembleProduct:
                         switch (activeRobot)
                         {
@@ -284,6 +294,7 @@ namespace CST276Lab3
                         }
                         activeState = whatAreWeDoing.AskIfQuit;
                         break;
+                    //After we're done building, give the user the ability to exit the program
                     case whatAreWeDoing.AskIfQuit:
                         Console.WriteLine("Are you done? (y/n)");
                         String quit = Console.ReadLine();

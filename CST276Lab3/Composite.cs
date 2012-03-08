@@ -5,14 +5,21 @@ using System.Text;
 
 namespace CST276Lab3
 {
+    //Abstract guitar component item (all nodes will be of this type)
     public abstract class GuitarComponent
     {
+        //These items must be implemented by all implementations, including GuitarItems
+        //Function to add children to the node
         public abstract void add(GuitarComponent guitarComponent);
+        //Function to create an iterator for all the node's children (as well as the node)
         public abstract Iterator createIterator();
+        //Returns the name of the node
         public abstract String getDescription();
+        //'Assembles' the node
         public abstract void assemble();
     }
 
+    //GuitarComponent objects (all non-atomic structures, represented as nodes with atomic and non-atomic children)
     public class ElectricGuitar : GuitarComponent
     {
         List<GuitarComponent> itemList = new List<GuitarComponent>();
@@ -27,7 +34,6 @@ namespace CST276Lab3
             add(new FinishHardware());
             add(new ElectricTuningAssembly());
         }
-
         public override void add(GuitarComponent guitarComponent)
         {
             itemList.Add(guitarComponent);
@@ -58,7 +64,6 @@ namespace CST276Lab3
             add(new FinishHardware());
             add(new AcousticTuningAssembly());
         }
-
         public override void add(GuitarComponent guitarComponent)
         {
             itemList.Add(guitarComponent);
@@ -86,7 +91,6 @@ namespace CST276Lab3
             add(new Rosewood());
             add(new Frets());
         }
-
         public override void add(GuitarComponent guitarComponent)
         {
             itemList.Add(guitarComponent);
@@ -114,7 +118,6 @@ namespace CST276Lab3
             add(new Maple());
             add(new ClearCoat());
         }
-
         public override void add(GuitarComponent guitarComponent)
         {
             itemList.Add(guitarComponent);
@@ -360,17 +363,22 @@ namespace CST276Lab3
         }
     }
 
+    //GuitarItem objects (all atomic structures)
     public abstract class GuitarItem : GuitarComponent
     {
+        //This isn't implemented, as these objects are atomic
         public override void add(GuitarComponent guitarComponent)
         {
             throw new NotImplementedException();
         }
+        //Returns a null iterator for the object, as it has no children to iterate through
         public override Iterator createIterator()
         {
             return new NullIterator();
         }
+        //Returns a description of the leaf
         public override abstract String getDescription();
+        //'Assembles' the leaf (places it in the GuitarComponent assembly that is the leaf's parent node)
         public override abstract void assemble();
     }
 
